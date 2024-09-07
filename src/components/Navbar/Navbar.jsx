@@ -6,7 +6,7 @@ const menuItems = [
         href: '#',
     },
     {
-        name: 'About',
+        name: 'Activities',
         href: '#',
     },
     {
@@ -18,7 +18,7 @@ const menuItems = [
         href: '#',
     },
     {
-        name: 'Accomdination',
+        name: 'Accommodation',
         href: '#',
     },
 ];
@@ -32,7 +32,7 @@ export function Navbar() {
                         <img
                             src="http://vednandini.com/wp-content/uploads/2018/09/Vednandini-Logo.png"
                             alt=""
-                            className="w-30 h-10"
+                            className="w-32 h-12"
                         />
                     </span>
                 </div>
@@ -64,13 +64,13 @@ export function Navbar() {
             </div>
 
             {/* Mobile View - Scrollable section */}
-            <div className="lg:hidden mt-4">
+            <div className="lg:hidden mt-1">
                 <div className="flex items-center space-x-6 overflow-x-auto px-4 py-2 scrollbar-hide">
                     {menuItems.map((item) => (
                         <a
                           key={item.name}
                           href={item.href}
-                          className="text-sm font-semibold text-gray-800 bg-gray-200 rounded-lg px-4 py-2  transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-green-700 hover:text-white"
+                          className="text-sm font-semibold text-gray-800 bg-gray-00 rounded-lg px-4 py-2  transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-green-700 hover:text-white"
                         >
                           {item.name}
                         </a>

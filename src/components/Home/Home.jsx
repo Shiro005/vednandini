@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import Activities from '../Activities/Activities';
+
 
 export function Home() {
   const scrollRef = useRef(null);
@@ -7,36 +9,39 @@ export function Home() {
   const images = [
     "https://vednandini.com/wp-content/uploads/2018/09/Main-.png",
     "https://vednandini.com/wp-content/uploads/2018/09/slide2.jpg",
-    "https://images.unsplash.com/photo-1507149833265-60c372daea22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjk5fDB8MHwxfGFsbHwzfHx8fHx8fHwxNjE1ODMyOTU5&ixlib=rb-1.2.1&q=80&w=400",
+    "https://vednandini.com/wp-content/uploads/2018/09/Cottage-3.jpg",
     "https://vednandini.com/wp-content/uploads/2018/09/act9.png",
     "https://vednandini.com/wp-content/uploads/2018/09/school4.png"
   ];
 
-  // Function to scroll images automatically every 1 second in a loop
+  // Function to scroll images automatically every 2 seconds in mobile view
   useEffect(() => {
-    const scrollInterval = setInterval(() => {
-      if (scrollRef.current) {
-        const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+    const isMobile = window.innerWidth < 768;
 
-        // Scroll by a smaller step size for mobile and larger for desktop
-        const scrollStep = window.innerWidth < 768 ? 150 : 300;
+    if (isMobile) {
+      const scrollInterval = setInterval(() => {
+        if (scrollRef.current) {
+          const maxScrollLeft = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
 
-        // Looping logic: restart from the first image after reaching the end
-        if (scrollRef.current.scrollLeft + scrollRef.current.clientWidth >= maxScrollLeft) {
-          scrollRef.current.scrollTo({
-            left: 0, // Restart from the beginning
-            behavior: 'smooth',
-          });
-        } else {
-          scrollRef.current.scrollBy({
-            left: scrollStep,
-            behavior: 'smooth',
-          });
+          const scrollStep = 150; // Adjust for mobile
+
+          // Looping logic: restart from the first image after reaching the end
+          if (scrollRef.current.scrollLeft + scrollRef.current.clientWidth >= maxScrollLeft) {
+            scrollRef.current.scrollTo({
+              left: 0, // Restart from the beginning
+              behavior: 'smooth',
+            });
+          } else {
+            scrollRef.current.scrollBy({
+              left: scrollStep,
+              behavior: 'smooth',
+            });
+          }
         }
-      }
-    }, 1000);
+      }, 2000);
 
-    return () => clearInterval(scrollInterval);
+      return () => clearInterval(scrollInterval);
+    }
   }, []);
 
   return (
@@ -44,7 +49,7 @@ export function Home() {
       <div className="mx-auto max-w-7xl px-4 py-12 md:py-16 lg:px-8">
         {/* Heading and Tagline */}
         <div className="text-center">
-          <h1 className="text-5xl font-extrabold tracking-tight text-green-900 md:text-6xl lg:text-7xl">
+          <h1 className="text-3xl font-extrabold tracking-tight text-green-900 md:text-5xl lg:text-6xl">
             Welcome to Vednandini Agri Food Court
           </h1>
           <p className="mt-4 text-2xl font-semibold text-gray-800">
@@ -69,13 +74,10 @@ export function Home() {
 
         {/* Automatically Scrolling Image Section */}
         <div className="mt-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Our Activities & Social Events
-          </h2>
           <div className="relative w-full overflow-hidden">
             <div
               ref={scrollRef}
-              className="flex space-x-4 overflow-x-auto py-4 scrollbar-hide"
+              className="flex space-x-4 overflow-x-auto py-4 scrollbar-hide md:scrollbar-visible"
               style={{ scrollBehavior: 'smooth', whiteSpace: 'nowrap' }}
             >
               {/* Map through the image array */}
@@ -90,6 +92,11 @@ export function Home() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Activities section  */}
+      <div className="mx-auto max-w-7xl px-4 md:py-16 lg:px-8">
+        <Activities />
       </div>
     </div>
   );
